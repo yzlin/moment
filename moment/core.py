@@ -1,5 +1,5 @@
 from calendar import timegm
-from datetime import datetime, timedelta
+from datetime import datetime
 from time import timezone
 
 import pytz

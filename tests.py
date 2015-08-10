@@ -149,9 +149,172 @@ class Weekdays(TestCase):
 
     def test_weekdays_with_larger_number_into_new_year(self):
         d = moment.date((2012, 12, 19))
-        expecting = moment.date("2013-01-09").date
+        expecting = moment.date('2013-01-09').date
         self.assertEquals(d.replace(weekday=24).date, expecting)
 
+class StartEndOfUnit(TestCase):
+
+    def test_start_of_year(self):
+        d = moment.date(2015, 8, 25)
+        expecting = moment.date(2015, 1, 1)
+        self.assertEquals(d.start_of('year'), expecting)
+        self.assertEquals(d.start_of('years'), expecting)
+
+    def test_start_of_quarter(self):
+        expecting = moment.date(2015, 1, 1)
+        d = moment.date(2015, 1, 25)
+        self.assertEquals(d.start_of('quarter'), expecting)
+        self.assertEquals(d.start_of('quarters'), expecting)
+        d = moment.date(2015, 2, 25)
+        self.assertEquals(d.start_of('quarter'), expecting)
+        self.assertEquals(d.start_of('quarters'), expecting)
+        d = moment.date(2015, 3, 25)
+        self.assertEquals(d.start_of('quarter'), expecting)
+        self.assertEquals(d.start_of('quarters'), expecting)
+
+        expecting = moment.date(2015, 4, 1)
+        d = moment.date(2015, 4, 25)
+        self.assertEquals(d.start_of('quarter'), expecting)
+        self.assertEquals(d.start_of('quarters'), expecting)
+        d = moment.date(2015, 5, 25)
+        self.assertEquals(d.start_of('quarter'), expecting)
+        self.assertEquals(d.start_of('quarters'), expecting)
+        d = moment.date(2015, 6, 25)
+        self.assertEquals(d.start_of('quarter'), expecting)
+        self.assertEquals(d.start_of('quarters'), expecting)
+
+        expecting = moment.date(2015, 7, 1)
+        d = moment.date(2015, 7, 25)
+        self.assertEquals(d.start_of('quarter'), expecting)
+        self.assertEquals(d.start_of('quarters'), expecting)
+        d = moment.date(2015, 8, 25)
+        self.assertEquals(d.start_of('quarter'), expecting)
+        self.assertEquals(d.start_of('quarters'), expecting)
+        d = moment.date(2015, 9, 25)
+        self.assertEquals(d.start_of('quarter'), expecting)
+        self.assertEquals(d.start_of('quarters'), expecting)
+
+        expecting = moment.date(2015, 10, 1)
+        d = moment.date(2015, 10, 25)
+        self.assertEquals(d.start_of('quarter'), expecting)
+        self.assertEquals(d.start_of('quarters'), expecting)
+        d = moment.date(2015, 11, 25)
+        self.assertEquals(d.start_of('quarter'), expecting)
+        self.assertEquals(d.start_of('quarters'), expecting)
+        d = moment.date(2015, 12, 25)
+        self.assertEquals(d.start_of('quarter'), expecting)
+        self.assertEquals(d.start_of('quarters'), expecting)
+
+    def test_start_of_month(self):
+        d = moment.date(2015, 8, 25)
+        expecting = moment.date(2015, 8, 1)
+        self.assertEquals(d.start_of('month'), expecting)
+        self.assertEquals(d.start_of('months'), expecting)
+
+    def test_start_of_day(self):
+        d = moment.date(2015, 8, 25, 12)
+        expecting = moment.date(2015, 8, 25, 0)
+        self.assertEquals(d.start_of('day'), expecting)
+        self.assertEquals(d.start_of('days'), expecting)
+
+    def test_start_of_hour(self):
+        d = moment.date(2015, 8, 25, 12, 33)
+        expecting = moment.date(2015, 8, 25, 12, 0)
+        self.assertEquals(d.start_of('hour'), expecting)
+        self.assertEquals(d.start_of('hours'), expecting)
+
+    def test_start_of_minute(self):
+        d = moment.date(2015, 8, 25, 12, 33, 49)
+        expecting = moment.date(2015, 8, 25, 12, 33, 0)
+        self.assertEquals(d.start_of('minute'), expecting)
+        self.assertEquals(d.start_of('minutes'), expecting)
+
+    def test_start_of_second(self):
+        d = moment.date(2015, 8, 25, 12, 33, 49, 123456)
+        expecting = moment.date(2015, 8, 25, 12, 33, 49, 0)
+        self.assertEquals(d.start_of('second'), expecting)
+        self.assertEquals(d.start_of('seconds'), expecting)
+
+    def test_end_of_year(self):
+        d = moment.date(2015, 8, 25)
+        expecting = moment.date(2015, 12, 31, 23, 59, 59, 999999)
+        self.assertEquals(d.end_of('year'), expecting)
+        self.assertEquals(d.end_of('years'), expecting)
+
+    def test_end_of_quarter(self):
+        expecting = moment.date(2015, 3, 31, 23, 59, 59, 999999)
+        d = moment.date(2015, 1, 25)
+        self.assertEquals(d.end_of('quarter').date, expecting.date)
+        self.assertEquals(d.end_of('quarters'), expecting)
+        d = moment.date(2015, 2, 25)
+        self.assertEquals(d.end_of('quarter'), expecting)
+        self.assertEquals(d.end_of('quarters'), expecting)
+        d = moment.date(2015, 3, 25)
+        self.assertEquals(d.end_of('quarter'), expecting)
+        self.assertEquals(d.end_of('quarters'), expecting)
+
+        expecting = moment.date(2015, 6, 30, 23, 59, 59, 999999)
+        d = moment.date(2015, 4, 25)
+        self.assertEquals(d.end_of('quarter'), expecting)
+        self.assertEquals(d.end_of('quarters'), expecting)
+        d = moment.date(2015, 5, 25)
+        self.assertEquals(d.end_of('quarter'), expecting)
+        self.assertEquals(d.end_of('quarters'), expecting)
+        d = moment.date(2015, 6, 25)
+        self.assertEquals(d.end_of('quarter'), expecting)
+        self.assertEquals(d.end_of('quarters'), expecting)
+
+        expecting = moment.date(2015, 9, 30, 23, 59, 59, 999999)
+        d = moment.date(2015, 7, 25)
+        self.assertEquals(d.end_of('quarter'), expecting)
+        self.assertEquals(d.end_of('quarters'), expecting)
+        d = moment.date(2015, 8, 25)
+        self.assertEquals(d.end_of('quarter'), expecting)
+        self.assertEquals(d.end_of('quarters'), expecting)
+        d = moment.date(2015, 9, 25)
+        self.assertEquals(d.end_of('quarter'), expecting)
+        self.assertEquals(d.end_of('quarters'), expecting)
+
+        expecting = moment.date(2015, 12, 31, 23, 59, 59, 999999)
+        d = moment.date(2015, 10, 25)
+        self.assertEquals(d.end_of('quarter'), expecting)
+        self.assertEquals(d.end_of('quarters'), expecting)
+        d = moment.date(2015, 11, 25)
+        self.assertEquals(d.end_of('quarter'), expecting)
+        self.assertEquals(d.end_of('quarters'), expecting)
+        d = moment.date(2015, 12, 25)
+        self.assertEquals(d.end_of('quarter'), expecting)
+        self.assertEquals(d.end_of('quarters'), expecting)
+
+    def test_end_of_month(self):
+        d = moment.date(2015, 8, 25)
+        expecting = moment.date(2015, 8, 31, 23, 59, 59, 999999)
+        self.assertEquals(d.end_of('month'), expecting)
+        self.assertEquals(d.end_of('months'), expecting)
+
+    def test_end_of_day(self):
+        d = moment.date(2015, 8, 25, 12)
+        expecting = moment.date(2015, 8, 25, 23, 59, 59, 999999)
+        self.assertEquals(d.end_of('day'), expecting)
+        self.assertEquals(d.end_of('days'), expecting)
+
+    def test_end_of_hour(self):
+        d = moment.date(2015, 8, 25, 12, 33)
+        expecting = moment.date(2015, 8, 25, 12, 59, 59, 999999)
+        self.assertEquals(d.end_of('hour'), expecting)
+        self.assertEquals(d.end_of('hours'), expecting)
+
+    def test_end_of_minute(self):
+        d = moment.date(2015, 8, 25, 12, 33, 49)
+        expecting = moment.date(2015, 8, 25, 12, 33, 59, 999999)
+        self.assertEquals(d.end_of('minute'), expecting)
+        self.assertEquals(d.end_of('minutes'), expecting)
+
+    def test_end_of_second(self):
+        d = moment.date(2015, 8, 25, 12, 33, 49, 123456)
+        expecting = moment.date(2015, 8, 25, 12, 33, 49, 999999)
+        self.assertEquals(d.end_of('second'), expecting)
+        self.assertEquals(d.end_of('seconds'), expecting)
 
 if __name__ == '__main__':
     main()
