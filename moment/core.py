@@ -17,7 +17,9 @@ class Moment(MutableDate):
             date, formula = parse_date_and_formula(*args)
         else:
             date, formula = (None, None)
-        self._date = date
+
+        super(Moment, self).__init__(date)
+
         self._formula = formula
 
     def now(self):
@@ -73,7 +75,7 @@ class Moment(MutableDate):
         date = self._date
         try:
             date = times.to_local(times.to_universal(date), zone)
-        except:
+        except Exception:
             date = times.to_local(date, zone)
         finally:
             self._date = date
@@ -88,7 +90,7 @@ class Moment(MutableDate):
         """Takes a Pythonic format, rather than the JS version."""
         return self._date.strftime(formula)
 
-    def diff(self, moment, measurement=None):
+    def diff(self, moment):
         """Return the difference between moments."""
         return self - moment
 

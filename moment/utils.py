@@ -2,9 +2,9 @@
 class switch(object):
     value = None
 
-    def __new__(klass, value):
-        klass.value = value
-        klass.matched = False
+    def __new__(cls, value):
+        cls.value = value
+        cls.matched = False
         return True
 
 

@@ -32,6 +32,7 @@ class MutableDate(object):
     """Incapsulate mutable dates in one class."""
 
     def __init__(self, date):
+        super(MutableDate, self).__init__()
         self._date = date
 
     def add(self, unit=None, amount=None, **kwargs):
