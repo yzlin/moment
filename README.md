@@ -1,9 +1,9 @@
 moment
 ======
 
-[![Build Status][travis]](https://travis-ci.org/zachwill/moment)
+[![Build Status][travis]](https://travis-ci.org/yzlin/moment)
 
-[travis]: https://travis-ci.org/zachwill/moment.png?branch=master
+[travis]: https://travis-ci.org/yzlin/moment.png?branch=master
 
 
 A Python library for dealing with dates/times. Inspired by both
@@ -84,6 +84,10 @@ moment.utcnow().timezone("US/Eastern").date
 # You can also clone a moment, so the original stays unaltered
 now = moment.utcnow().timezone("US/Pacific")
 future = now.clone().add(weeks=2)
+
+# Get start/end of week
+moment.now().start_of('week')
+moment.now().end_of('week')
 ```
 
 Chaining
